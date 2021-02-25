@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Acr.UserDialogs;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
@@ -24,9 +25,24 @@ namespace XamarinFormsTutorial.ViewModels
 
         private void AddNoteCommandExecute(object obj)
         {
+            if (String.IsNullOrEmpty(this.Text))
+            {
+                ShowAlert("La nota esta vacia. Ingresa una nota valida.");
+                return;
+            }
+
             Notes.Add(new Note() { Text = this.Text, Date = DateTime.Now });
             RaisePropertyChanged(nameof(Notes));
             Text = string.Empty;
+        }
+
+        private void ShowAlert(string message)
+        {
+            var aConfi = new AlertConfig();
+            aConfi.SetMessage(message);
+            aConfi.SetTitle("Error");
+            aConfi.SetOkText("Ok");
+            UserDialogs.Instance.Alert(aConfi);
         }
 
         public ObservableCollection<Note> Notes { get; set; }
