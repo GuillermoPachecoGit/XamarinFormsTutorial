@@ -14,11 +14,11 @@ namespace XamarinFormsTutorial.ViewModels
         private int _counter = 0;
         public HomePageViewModel(INavigationService navigationService)
             : base(navigationService) {
-            // AddClickCommand = new Command(AddClikCommandExecuteAsync);
-            // ClickCounterTitle = $"Clicks 0";
+             AddClickCommand = new Command(AddClikCommandExecuteAsync);
+             ClickCounterTitle = $"Clicks 0";
         }
 
-        /*
+        
         private void AddClikCommandExecuteAsync(object obj)
         {
             ClickCounterTitle = $"Clicks {_counter+=1}";
@@ -34,6 +34,6 @@ namespace XamarinFormsTutorial.ViewModels
             }
         }
 
-        public ICommand AddClickCommand { get; set; }*/
+        public ICommand AddClickCommand { get; set; }
     }
 }

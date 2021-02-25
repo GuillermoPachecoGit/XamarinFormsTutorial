@@ -8,13 +8,13 @@
     <StackLayout>
         <Label HorizontalOptions="Center" FontSize="24" Text="Este es la Home view"></Label>
 
-       <!-- <StackLayout 
+        <StackLayout 
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
             Orientation="Vertical">
             <Label TextColor="Black" Text="{Binding ClickCounterTitle}"></Label>
             <Button Command="{Binding AddClickCommand}"></Button>
-        </StackLayout> -->
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>

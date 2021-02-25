@@ -29,6 +29,7 @@ namespace XamarinFormsTutorial
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
+            containerRegistry.RegisterForNavigation<ListPage, ListPageViewModel>();
         }
     }
 }
