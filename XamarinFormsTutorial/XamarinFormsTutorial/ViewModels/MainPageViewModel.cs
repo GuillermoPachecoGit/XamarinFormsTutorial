@@ -17,6 +17,7 @@ namespace XamarinFormsTutorial.ViewModels
         {
             Title = "Main Page";
             TapCommand = new Command(async () => await TapCommandExecuteAsync());
+            ListCommand = new Command(async () => await ListCommandExecuteAsync());
         }
 
         private async System.Threading.Tasks.Task TapCommandExecuteAsync()
@@ -24,6 +25,14 @@ namespace XamarinFormsTutorial.ViewModels
             await NavigationService.NavigateAsync("HomePage");
         }
 
+        private async System.Threading.Tasks.Task ListCommandExecuteAsync()
+        {
+            await NavigationService.NavigateAsync("ListPage");
+        }
+
         public ICommand TapCommand { get; set; }
+
+        public ICommand ListCommand { get; set; }
+        
     }
 }

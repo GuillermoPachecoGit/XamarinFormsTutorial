@@ -6,8 +6,11 @@
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Button
-             Text="Enter"
+             Text="Click Counter Example"
              Command="{Binding TapCommand}"></Button>
+        <Button
+             Text="List View Example"
+             Command="{Binding ListCommand}"></Button>
     </StackLayout>
 
 </ContentPage>
