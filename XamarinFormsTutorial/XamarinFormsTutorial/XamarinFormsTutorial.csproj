@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.475" />
     <PackageReference Include="Refit" Version="6.0.24" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
     <PackageReference Include="Prism.Unity.Forms" Version="8.0.0.1909" />
@@ -14,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Converters\" />
-    <Folder Include="Config\" />
     <Folder Include="Events\" />
   </ItemGroup>
 
