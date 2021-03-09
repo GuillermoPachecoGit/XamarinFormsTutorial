@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using XamarinFormsTutorial.Models;
 using XamarinFormsTutorial.ServicesApi;
@@ -50,18 +51,23 @@ namespace XamarinFormsTutorial.ViewModels
                 var random = new Random();
                 var note = new NoteAPI() { tarea = this.Text, id = random.Next() };
 
+                await App.RepositoryNote.AddItemAsync(note);
 
-                // send to BE
-                var apiResponse = RestService.For<INoteService>("https://c-3po-clases.herokuapp.com");
+                var currentConnection = Connectivity.NetworkAccess;
 
-                Task.Run(async () =>
+                if (currentConnection == NetworkAccess.Internet)
                 {
-                    UserDialogs.Instance.ShowLoading();
-                    await apiResponse.PostNote(note);
-                    UserDialogs.Instance.HideLoading();
-                    RaisePropertyChanged(nameof(Notes));
-                });
+                    // send to BE
+                    var apiResponse = RestService.For<INoteService>("https://c-3po-clases.herokuapp.com");
 
+                    Task.Run(async () =>
+                    {
+                        UserDialogs.Instance.ShowLoading();
+                        await apiResponse.PostNote(note);
+                        UserDialogs.Instance.HideLoading();
+                        RaisePropertyChanged(nameof(Notes));
+                    });
+                }
                 Notes.Add(note);
                 RaisePropertyChanged(nameof(Notes));
                 Text = string.Empty;
@@ -81,16 +87,33 @@ namespace XamarinFormsTutorial.ViewModels
 
         public void OnAppearing()
         {
-            var apiResponse = RestService.For<INoteService>("https://c-3po-clases.herokuapp.com");
+            var currentConnection = Connectivity.NetworkAccess;
 
-            Task.Run(async () =>
+            if (currentConnection == NetworkAccess.Internet)
             {
-                UserDialogs.Instance.ShowLoading();
-                var notes = await apiResponse.GetNotes();
-                Notes = new ObservableCollection<NoteAPI>(notes);
-                UserDialogs.Instance.HideLoading();
-                RaisePropertyChanged(nameof(Notes));
-            });
+                var apiResponse = RestService.For<INoteService>("https://c-3po-clases.herokuapp.com");
+
+                Task.Run(async () =>
+                {
+                    UserDialogs.Instance.ShowLoading();
+                    var notes = await apiResponse.GetNotes();
+                    Notes = new ObservableCollection<NoteAPI>(notes);
+                    UserDialogs.Instance.HideLoading();
+                    RaisePropertyChanged(nameof(Notes));
+                });
+            }
+            else
+            {
+                Task.Run(async () =>
+                {
+                    UserDialogs.Instance.ShowLoading();
+                    var notes = await App.RepositoryNote.GetItemsAsync();
+                    Notes = new ObservableCollection<NoteAPI>(notes);
+                    UserDialogs.Instance.HideLoading();
+                    RaisePropertyChanged(nameof(Notes));
+                });
+            }
+
         }
 
         public void OnDisappearing()

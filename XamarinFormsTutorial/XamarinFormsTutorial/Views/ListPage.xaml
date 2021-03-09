@@ -19,8 +19,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell
-                            Text="{Binding id}"
-                            Detail="{Binding tarea}" />
+                            Text="{Binding tarea}"
+                            Detail="{Binding date}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

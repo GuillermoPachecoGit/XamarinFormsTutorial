@@ -13,7 +13,6 @@ namespace XamarinFormsTutorial
 {
     public partial class App
     {
-
         private static SQLiteConnection database;
         public static SQLiteConnection Database
         {
@@ -28,6 +27,8 @@ namespace XamarinFormsTutorial
             }
         }
 
+        public static Repository<NoteAPI> RepositoryNote { get; private set; }
+
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
@@ -39,7 +40,7 @@ namespace XamarinFormsTutorial
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
 
-            App.Database.CreateTable<NoteAPI>();
+            RepositoryNote = new Repository<NoteAPI>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
